@@ -1,0 +1,68 @@
+=== Rails Admin
+
+Since 1.4.7, it is the user's responsibility to create assets/javascripts/rails_admin/custom/ui.js and include rich
+
+  //= require rich/base
+
+To use Rich in your RA forms, use the following in your initializer:
+
+  config.model Post do
+    edit do
+      field :title
+      field :body, :rich_editor do
+        config({
+          :insert_many => true
+        })
+      end
+    end
+  end
+
+To use the image picker on a string field, do this:
+
+  field :title, :rich_picker do
+    config({
+      :allowed_styles => [:original],
+      :view_mode => "list"
+    })
+  end
+
+== Rich in production mode
+
+Rich works just fine in production mode. To accommodate the structure of the CKEditor source, Rich extends the <tt>assets:precompile</tt> task to make sure the full CKEditor source tree is copied to your assets folder. So the following works as you would expect:
+
+  rake assets:precompile
+
+Rich will also clean up these CKEditor files when you clean your assets. Like this:
+
+  rake assets:clean
+
+Although generally not necessary, the underlying Rich tasks can be invoked directly.
+
+  rake rich:assetize_ckeditor
+  rake rich:clean_ckeditor
+
+== Configuration and overrides
+
+Take a look at the generated <tt>rich.rb</tt> initializer and – if you want to dig deeper – the Rich sourcecode. The initializer guides you through the most important settings and configuration options.
+
+=== Localization
+
+Localization should be automatic. Rich uses the currently set locale (<tt>I18n.locale</tt>) for it's editor and file browser.
+
+=== CKEditor configuration
+
+Rich attempts to provide you with a sensible set of buttons and capabilities. But of course, you might disagree. To that end, you can configure CKEditor through the <tt>config</tt> directive, either globally through the initializer, or per editor instance as an option.
+
+Rich also includes a few settings that manipulate CKEditor settings, but are a bit easier to use. For example, you can set <tt>:allow_embeds</tt> to <tt>true</tt> to load a media embed plugin (think Youtube, Vimeo, etc.)
+
+=== Editor styles
+
+When you run the generator a css file is created for you in <tt>app/assets/stylesheets/rich/editor.css</tt>. Use this stylesheet to define the contents of the Styles drop down in CKEditor.
+
+=== Image configuration & (re)processing
+
+The styles you define in the initializer are passed to Paperclip directly, so the syntax is identical. See https://github.com/thoughtbot/paperclip/wiki/Thumbnail-Generation for more information. You can also set additional processing options using <tt>convert_options</tt>. See your Rich initializer for more information.
+
+When you change styles after uploading files, you will need to re-process those old files. To accomplish this, run the following command (avoid the standard Paperclip task!).
+
+  rake rich:refresh_assets

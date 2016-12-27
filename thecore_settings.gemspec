@@ -9,14 +9,22 @@ Gem::Specification.new do |s|
   s.version     = ThecoreSettings::VERSION
   s.authors     = ["Gabriele Tassoni"]
   s.email       = ["gabrieletassoni@taris.it"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ThecoreSettings."
-  s.description = "TODO: Description of ThecoreSettings."
+  s.homepage    = "https://taris.it"
+  s.summary     = "Adds settings section."
+  s.description = "Automagically manage settings."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.0.0", ">= 5.0.0.1"
 
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "thecore"
+  s.add_dependency "rich"
+  s.add_dependency "russian_phone"
+  s.add_dependency "sanitize"
+  s.add_dependency "safe_yaml"
+  s.add_dependency "validates_email_format_of"
+  s.add_dependency "geocoder"
+  s.add_dependency "paperclip"
+  s.add_dependency "addressable"
+  s.add_dependency "rails_admin_settings"
 end
