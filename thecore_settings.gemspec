@@ -17,14 +17,14 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
 
-  s.add_dependency "thecore"
-  s.add_dependency "rich"
-  s.add_dependency "russian_phone"
-  s.add_dependency "sanitize"
-  s.add_dependency "safe_yaml"
-  s.add_dependency "validates_email_format_of"
-  s.add_dependency "geocoder"
-  s.add_dependency "paperclip"
-  s.add_dependency "addressable"
-  s.add_dependency "rails_admin_settings"
+  s.add_dependency "thecore", "~> 1.0"
+  s.add_dependency "rich", "~> 0"
+  s.add_dependency "russian_phone", "~> 0"
+  s.add_dependency "sanitize", "~> 0"
+  s.add_dependency "safe_yaml", "~> 0"
+  s.add_dependency "validates_email_format_of", "~> 0"
+  s.add_dependency "geocoder", "~> 0"
+  s.add_dependency "paperclip", "~> 0"
+  s.add_dependency "addressable", "~> 0"
+  s.add_dependency "rails_admin_settings", "~> 0"
 end
