@@ -7,6 +7,7 @@ require "validates_email_format_of"
 require "geocoder"
 require "paperclip"
 require "addressable"
+require "rails_admin_settings"
 
 module ThecoreSettings
   # Your code goes here...
