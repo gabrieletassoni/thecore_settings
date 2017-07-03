@@ -18,13 +18,13 @@ Gem::Specification.new do |s|
 
 
   s.add_dependency "thecore", "~> 1.0"
-  s.add_dependency "rich", "~> 0"
-  s.add_dependency "russian_phone", "~> 0"
-  s.add_dependency "sanitize", "~> 0"
-  s.add_dependency "safe_yaml", "~> 0"
-  s.add_dependency "validates_email_format_of", "~> 0"
-  s.add_dependency "geocoder", "~> 0"
-  s.add_dependency "paperclip", "~> 0"
-  s.add_dependency "addressable", "~> 0"
-  s.add_dependency "rails_admin_settings", "~> 0"
+  s.add_dependency "rich", "~> 1.4"
+  s.add_dependency "russian_phone", "~> 0.6"
+  s.add_dependency "sanitize", "~> 4.5"
+  s.add_dependency "safe_yaml", "~> 1.0"
+  s.add_dependency "validates_email_format_of", "~> 1.6"
+  s.add_dependency "geocoder", "~> 1.4"
+  s.add_dependency "paperclip", "~> 5.1"
+  s.add_dependency "addressable", "~> 2.5"
+  s.add_dependency "rails_admin_settings", "~> 1.3"
 end
