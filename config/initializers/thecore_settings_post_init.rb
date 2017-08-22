@@ -4,5 +4,6 @@ Rails.application.configure do
     require 'rails_admin_settings'
 		require 'thecore_settings'
     require 'rails_admin_requirements'
+    require 'thecore_settings_abilities'
   end
 end
