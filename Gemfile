@@ -13,5 +13,16 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'sqlite3'
+
 gem 'thecore', path: '../../thecore_project/thecore'
 
+#gem "rich", "~> 1.4"
+gem "russian_phone", "~> 0.6"
+gem "sanitize", "~> 4.5"
+gem "safe_yaml", "~> 1.0"
+gem "validates_email_format_of", "~> 1.6"
+gem "geocoder", "~> 1.4"
+gem "paperclip", "~> 5.1"
+gem "addressable", "~> 2.5"
+gem "rails_admin_settings", "~> 1.3"
