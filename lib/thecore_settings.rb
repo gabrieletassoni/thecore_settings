@@ -11,8 +11,8 @@ require "rails_admin_settings"
 
 module ThecoreSettings
   # Your code goes here...
-  # SafeYAML::OPTIONS[:default_mode] = :safe
-  # SafeYAML::OPTIONS[:deserialize_symbols] = false
+  SafeYAML::OPTIONS[:default_mode] = :safe
+  SafeYAML::OPTIONS[:deserialize_symbols] = false
   #
   # if Object.const_defined?("Rich")
   #   Rich.setup do |config|
