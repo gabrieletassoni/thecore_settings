@@ -2,7 +2,7 @@ require 'active_support/concern'
 
 require 'rails_admin_settings'
 
-module TheCoreAbilitiesConcern
+module TheCoreSettingsAbilitiesConcern
   extend ActiveSupport::Concern
   included do
     def thecore_settings_abilities user
@@ -18,4 +18,4 @@ module TheCoreAbilitiesConcern
 end
 
 # include the extension
-TheCoreAbilities.send(:include, TheCoreAbilitiesConcern)
+TheCoreAbilities.send(:include, TheCoreSettingsAbilitiesConcern)
