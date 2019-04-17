@@ -7,6 +7,7 @@ module TheCoreSettingsAbilitiesConcern
   included do
     def thecore_settings_abilities user
       cannot :manage, [RailsAdminSettings::Setting]
+      cannot :dashboard, [RailsAdminSettings::Setting]
       # Pay attention to this errorTypeError (can't convert Class to Array (Class#to_ary gives String)):
       if user && user.admin?
         can [:index, :update], [RailsAdminSettings::Setting]
