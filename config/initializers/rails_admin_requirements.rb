@@ -1,5 +1,3 @@
-require 'rails_admin_settings'
-
 module RailsAdminSettings
   module RailsAdminExtensionConfig
     def self.included(base)
