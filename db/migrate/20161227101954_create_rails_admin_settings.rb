@@ -1,6 +1,6 @@
 class CreateRailsAdminSettings < ActiveRecord::Migration[5.0]
   def change
-    create_table :rails_admin_settings do |t|
+    create_table :thecore_settings do |t|
       t.boolean :enabled, default: true
       t.string :kind, null: false, default: 'string'
       t.string :ns, default: 'main'
@@ -19,7 +19,7 @@ class CreateRailsAdminSettings < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :rails_admin_settings, :key
-    add_index :rails_admin_settings, [:ns, :key], unique: true
+    add_index :thecore_settings, :key
+    add_index :thecore_settings, [:ns, :key], unique: true
   end
 end
