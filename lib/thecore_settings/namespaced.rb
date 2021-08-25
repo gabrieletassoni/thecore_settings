@@ -194,7 +194,9 @@ module ThecoreSettings
           opts.delete(:enabled)
         end
         opts.delete(:overwrite)
-        @settings[key].update_attributes!(opts)
+        # Pre Rails 6.1 vs Post Rails 6.1
+        # In Rails 6.1 update_attributes has been deprecated
+        @settings[key].respond_to?('update_attributes!') ? @settings[key].update_attributes!(opts) : @settings[key].update!(opts)
       end
       if is_file
         if options[:overwrite] != false || !@settings[key].file?
