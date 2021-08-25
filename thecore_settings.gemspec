@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "factory_bot"
   spec.add_development_dependency "safe_yaml"
   spec.add_development_dependency "russian_phone"
-  spec.add_development_dependency "sanitize"
+  spec.add_development_dependency "sanitize", "~ 6.0"
   spec.add_development_dependency "validates_email_format_of"
   spec.add_development_dependency "geocoder"
   spec.add_development_dependency "addressable"
