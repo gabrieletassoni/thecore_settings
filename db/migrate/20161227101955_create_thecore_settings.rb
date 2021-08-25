@@ -1,4 +1,4 @@
-class CreateThecoreSettings < ActiveRecord::Migration[5.0]
+class CreateThecoreSettings < ActiveRecord::Migration[5.2]
   def change
     create_table :thecore_settings do |t|
       t.boolean :enabled, default: true
