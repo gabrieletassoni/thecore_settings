@@ -4,7 +4,7 @@ module ThecoreSettings
       require File.expand_path('../tasks', __FILE__)
     end
 
-    initializer 'ThecoreSettings Install after_action' do |app|
+    initializer 'ThecoreSettings.install_after_action' do |app|
       require File.dirname(__FILE__) + '/../../app/models/thecore_settings/setting.rb'
 
       if defined?(ActionController) and defined?(ActionController::Base)
