@@ -11,9 +11,9 @@ en:
       color_invalid: Incorrect color
   mongoid: &mongoid
     models:
-      rails_admin_settings/setting: Settings
+      thecore_settings/setting: Settings
     attributes:
-      rails_admin_settings/setting:
+      thecore_settings/setting:
         c_at: Created
         u_at: Updated
         enabled: Enabled

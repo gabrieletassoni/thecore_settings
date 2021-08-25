@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# this tests check how well rails_admin_settings handles settings disappearing from DB during execution
+# this tests check how well thecore_settings handles settings disappearing from DB during execution
 # real usage: app specs with database_cleaner enabled
 describe 'Database trickery' do
 
@@ -11,7 +11,7 @@ describe 'Database trickery' do
     email2 = "my2@mail.ru"
     Settings.email = email
     expect(Settings.email).to eq(email)
-    RailsAdminSettings::Setting.destroy_all
+    ThecoreSettings::Setting.destroy_all
     # settings are still cached
     expect(Settings.email).to eq(email)
 
@@ -21,13 +21,13 @@ describe 'Database trickery' do
 
   it "should handle settings appearing in DB when settings are loaded" do
     expect(Settings.tst2).to eq('')
-    RailsAdminSettings::Setting.create!(key: 'tst', raw: 'tst')
+    ThecoreSettings::Setting.create!(key: 'tst', raw: 'tst')
     # settings are still cached, but when we try to create a setting it sees updated value in DB
     expect(Settings.tst).to eq('tst')
   end
 
   it "should handle settings appearing in DB when settings are not loaded" do
-    RailsAdminSettings::Setting.create(key: 'tst', raw: 'tst')
+    ThecoreSettings::Setting.create(key: 'tst', raw: 'tst')
     Settings.tst = 'str'
     expect(Settings.tst).to eq('str')
   end

@@ -1,27 +1,27 @@
-if RailsAdminSettings.active_record?
-  module RailsAdminSettings
+if ThecoreSettings.active_record?
+  module ThecoreSettings
     class Setting < ActiveRecord::Base
     end
   end
 end
 
-module RailsAdminSettings
+module ThecoreSettings
   class Setting
-    if RailsAdminSettings.mongoid?
-      include RailsAdminSettings::Mongoid
+    if ThecoreSettings.mongoid?
+      include ThecoreSettings::Mongoid
     end
 
-    if RailsAdminSettings.active_record?
-      self.table_name = "rails_admin_settings"
+    if ThecoreSettings.active_record?
+      self.table_name = "thecore_settings"
     end
 
     scope :enabled, -> { where(enabled: true) }
     scope :ns, ->(ns) { where(ns: ns) }
 
-    include RailsAdminSettings::RequireHelpers
-    include RailsAdminSettings::Processing
-    include RailsAdminSettings::Uploads
-    include RailsAdminSettings::Validation
+    include ThecoreSettings::RequireHelpers
+    include ThecoreSettings::Processing
+    include ThecoreSettings::Uploads
+    include ThecoreSettings::Validation
 
     def disabled?
       !enabled
@@ -60,18 +60,18 @@ module RailsAdminSettings
 
     # t = {_all: 'Все'}
     if ::Settings.table_exists?
-      ::RailsAdminSettings::Setting.pluck(:ns).uniq.each do |c|
+      ::ThecoreSettings::Setting.pluck(:ns).uniq.each do |c|
          s = "ns_#{c.gsub('-', '_')}".to_sym
          scope s, -> { where(ns: c) }
          # t[s] = c
        end
      end
-     # I18n.backend.store_translations(:ru, {admin: {scopes: {'rails_admin_settings/setting': t}}})
+     # I18n.backend.store_translations(:ru, {admin: {scopes: {'thecore_settings/setting': t}}})
 
     if Object.const_defined?('RailsAdmin')
-      include RailsAdminSettings::RailsAdminConfig
+      include ThecoreSettings::RailsAdminConfig
     else
-      puts "[rails_admin_settings] Rails Admin not detected -- put this gem after rails_admin in gemfile"
+      puts "[thecore_settings] Rails Admin not detected -- put this gem after rails_admin in gemfile"
     end
   end
 end

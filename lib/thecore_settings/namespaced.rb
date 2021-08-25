@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   # we are inheriting from BasicObject so we don't get a bunch of methods from
   # Kernel or Object
   class Namespaced < BasicObject
@@ -18,7 +18,7 @@ module RailsAdminSettings
       false
     end
     def inspect
-      "#<RailsAdminSettings::Namespaced name: #{@name.inspect}, fallback: #{@fallback.inspect}, loaded: #{@loaded}>"
+      "#<ThecoreSettings::Namespaced name: #{@name.inspect}, fallback: #{@fallback.inspect}, loaded: #{@loaded}>"
     end
     def pretty_inspect
       inspect
@@ -29,7 +29,7 @@ module RailsAdminSettings
         return if loaded
         @loaded = true
         @settings = {}
-        ::RailsAdminSettings::Setting.ns(@name).each do |setting|
+        ::ThecoreSettings::Setting.ns(@name).each do |setting|
           @settings[setting.key] = setting
         end
       end
@@ -106,14 +106,14 @@ module RailsAdminSettings
       load!
       key = key.to_s
       mutex.synchronize do
-        ::RailsAdminSettings::Setting.where(ns: @name, key: key).destroy_all
+        ::ThecoreSettings::Setting.where(ns: @name, key: key).destroy_all
         @settings.delete(key)
       end
     end
 
     def destroy_all!
       mutex.synchronize do
-        ::RailsAdminSettings::Setting.where(ns: @name).destroy_all
+        ::ThecoreSettings::Setting.where(ns: @name).destroy_all
         @loaded = false
         @settings = {}
       end
@@ -133,7 +133,7 @@ module RailsAdminSettings
       elsif key.end_with?('_enabled=')
         key = key[0..-10]
         v = get(key)
-        if ::RailsAdminSettings.mongoid?
+        if ::ThecoreSettings.mongoid?
           if ::Mongoid::VERSION >= "4.0.0"
             v.set(enabled: args.first)
           else
@@ -174,15 +174,15 @@ module RailsAdminSettings
 
       if @settings[key].nil?
         options.delete(:overwrite)
-        v = ::RailsAdminSettings::Setting.create(options.merge(key: key))
+        v = ::ThecoreSettings::Setting.create(options.merge(key: key))
         if !v.persisted?
           if v.errors[:key].any?
-            v = ::RailsAdminSettings::Setting.where(key: key).first
+            v = ::ThecoreSettings::Setting.where(key: key).first
             if v.nil?
-              ::Kernel.raise ::RailsAdminSettings::PersistenceException, 'Fatal: error in key and not in DB'
+              ::Kernel.raise ::ThecoreSettings::PersistenceException, 'Fatal: error in key and not in DB'
             end
           else
-            ::Kernel.raise ::RailsAdminSettings::PersistenceException, v.errors.full_messages.join(',')
+            ::Kernel.raise ::ThecoreSettings::PersistenceException, v.errors.full_messages.join(',')
           end
         end
         @settings[key] = v

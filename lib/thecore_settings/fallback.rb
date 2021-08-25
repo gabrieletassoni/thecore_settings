@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   # we are inheriting from BasicObject so we don't get a bunch of methods from
   # Kernel or Object
   class Fallback < BasicObject
@@ -8,7 +8,7 @@ module RailsAdminSettings
     end
 
     def inspect
-      "#<RailsAdminSettings::Fallback ns: #{@ns.inspect}, fb: #{@fb.inspect}>"
+      "#<ThecoreSettings::Fallback ns: #{@ns.inspect}, fb: #{@fb.inspect}>"
     end
 
     def method_missing(*args)

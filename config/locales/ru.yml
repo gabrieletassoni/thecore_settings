@@ -11,9 +11,9 @@ ru:
       color_invalid: Неверный цвет
   mongoid: &mongoid
     models:
-      rails_admin_settings/setting: Настройки
+      thecore_settings/setting: Настройки
     attributes:
-      rails_admin_settings/setting:
+      thecore_settings/setting:
         c_at: Создано
         u_at: Обновлено
         enabled: Включено

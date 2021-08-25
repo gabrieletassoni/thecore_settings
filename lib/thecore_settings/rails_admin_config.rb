@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   module RailsAdminConfig
     def self.included(base)
       if base.respond_to?(:rails_admin)
@@ -33,7 +33,7 @@ module RailsAdminSettings
               end
             end
             if ::Settings.table_exists?
-              nss = ::RailsAdminSettings::Setting.pluck(:ns).uniq.map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
+              nss = ::ThecoreSettings::Setting.pluck(:ns).uniq.map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
               scopes([nil] + nss)
             end
           end
@@ -64,7 +64,7 @@ module RailsAdminSettings
           end
         end
       else
-        puts "[rails_admin_settings] Problem: model does not respond to rails_admin: this should not happen"
+        puts "[thecore_settings] Problem: model does not respond to rails_admin: this should not happen"
       end
     end
   end

@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   class HexColorValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
       record.errors[attribute] << (options[:message] || I18n.t('admin.settings.color_invalid')) unless value.blank? || self.class.matches?(value)

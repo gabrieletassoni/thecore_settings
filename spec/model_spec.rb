@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe RailsAdminSettings::Setting do
+describe ThecoreSettings::Setting do
   it { is_expected.to have_fields(:enabled, :key, :kind, :raw) }
 
   it "correctly return content when enabled" do
@@ -51,7 +51,7 @@ describe RailsAdminSettings::Setting do
     else
       expect {
         FactoryBot.create(:setting, raw: '&copy; {{year}} company <a href="javascript:alert()">test</a>', kind: 'sanitize')
-      }.to raise_error(RailsAdminSettings::NoRailsError)
+      }.to raise_error(ThecoreSettings::NoRailsError)
     end
   end
 
@@ -63,7 +63,7 @@ describe RailsAdminSettings::Setting do
     else
       expect {
         FactoryBot.create(:setting, raw: '&copy; {{year}} company <a href="javascript:alert()">test</a>', kind: 'sanitize_code')
-      }.to raise_error(RailsAdminSettings::NoRailsError)
+      }.to raise_error(ThecoreSettings::NoRailsError)
     end
   end
 
@@ -75,7 +75,7 @@ describe RailsAdminSettings::Setting do
     else
       expect {
         FactoryBot.create(:setting, raw: '&copy; {{year}} company <a href="javascript:alert()">test</a>', kind: 'strip_tags')
-      }.to raise_error(RailsAdminSettings::NoRailsError)
+      }.to raise_error(ThecoreSettings::NoRailsError)
     end
   end
 
@@ -87,7 +87,7 @@ describe RailsAdminSettings::Setting do
     else
       expect {
         FactoryBot.create(:setting, raw: "&copy; {{year}}\n\ncompany <a href='javascript:alert()'>test</a>", kind: 'simple_format')
-      }.to raise_error(RailsAdminSettings::NoRailsError)
+      }.to raise_error(ThecoreSettings::NoRailsError)
     end
   end
 
@@ -99,7 +99,7 @@ describe RailsAdminSettings::Setting do
     else
       expect {
         FactoryBot.create(:setting, raw: "&copy; {{year}}\n\ncompany <a href='javascript:alert()'>test</a>", kind: 'simple_format_raw')
-      }.to raise_error(RailsAdminSettings::NoRailsError)
+      }.to raise_error(ThecoreSettings::NoRailsError)
     end
   end
 end

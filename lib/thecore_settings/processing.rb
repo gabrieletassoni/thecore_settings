@@ -1,6 +1,6 @@
-module RailsAdminSettings
+module ThecoreSettings
   module Processing
-    RailsAdminSettings.kinds.each do |dkind|
+    ThecoreSettings.kinds.each do |dkind|
       define_method "#{dkind}_kind?" do
         dkind == kind
       end
@@ -10,7 +10,7 @@ module RailsAdminSettings
     end
 
     def text_kind?
-      (RailsAdminSettings.kinds - ['phone', 'phones', 'integer', 'float', 'yaml', 'json', 'boolean']).include? kind
+      (ThecoreSettings.kinds - ['phone', 'phones', 'integer', 'float', 'yaml', 'json', 'boolean']).include? kind
     end
 
     def upload_kind?
@@ -83,7 +83,7 @@ module RailsAdminSettings
           end
         when 'sanitize', 'sanitize_code'
           require_rails do
-            self.raw = RailsAdminSettings.scrubber.sanitize(raw)
+            self.raw = ThecoreSettings.scrubber.sanitize(raw)
           end
         when 'sanitized'
           require_sanitize do
@@ -203,7 +203,7 @@ module RailsAdminSettings
       elsif file_kind?
         file.url
       else
-        puts "[rails_admin_settings] Unknown field kind: #{kind}"
+        puts "[thecore_settings] Unknown field kind: #{kind}"
         nil
       end
     end

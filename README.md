@@ -1,15 +1,17 @@
-# RailsAdminSettings
+# ThecoreSettings
 
-Master repository has moved to gitlab, all new code will be there:
+Project forked from:
 
-https://gitlab.com/rocket-science/rails_admin_settings
+https://gitlab.com/rocket-science/thecore_settings
+
+Since it looks in hyatus status.
 
 
-[![Build Status](https://secure.travis-ci.org/rs-pro/rails_admin_settings.png?branch=master)](http://travis-ci.org/rs-pro/rails_admin_settings)
-[![Gem Version](https://badge.fury.io/rb/rails_admin_settings.svg)](https://badge.fury.io/rb/rails_admin_settings)
-[![security](https://hakiri.io/github/rs-pro/rails_admin_settings/master.svg)](https://hakiri.io/github/rs-pro/rails_admin_settings/master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/de00cbec10559ebd2b4b/maintainability)](https://codeclimate.com/github/rs-pro/rails_admin_settings/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/de00cbec10559ebd2b4b/test_coverage)](https://codeclimate.com/github/rs-pro/rails_admin_settings/test_coverage)
+[![Build Status](https://secure.travis-ci.org/rs-pro/thecore_settings.png?branch=master)](http://travis-ci.org/rs-pro/thecore_settings)
+[![Gem Version](https://badge.fury.io/rb/thecore_settings.svg)](https://badge.fury.io/rb/thecore_settings)
+[![security](https://hakiri.io/github/rs-pro/thecore_settings/master.svg)](https://hakiri.io/github/rs-pro/thecore_settings/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/de00cbec10559ebd2b4b/maintainability)](https://codeclimate.com/github/rs-pro/thecore_settings/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/de00cbec10559ebd2b4b/test_coverage)](https://codeclimate.com/github/rs-pro/thecore_settings/test_coverage)
 
 App settings editable via RailsAdmin with support for ActiveRecord and Mongoid.
 
@@ -24,17 +26,26 @@ Supports images, files, html with or without sanitization, code with codemirror,
 
 ## Installation
 
-Add this line to your application's Gemfile:
+1. Add this line to your application's Gemfile:
 
-    gem 'rails_admin_settings'
+    ```shell
+    gem 'thecore_settings'
+    ```
 
-For activerecord, generage migration:
+2. Then migrate:
 
-    rails g rails_admin_settings:migration
+    ```shell
+    rails db:migrate
+    ```
 
-Then migrate:
 
-    rake db:migrate
+### OPTIONAL Generage migration 
+
+Not needed anymore since migrations from this gem are automatically loaded by main app when needed:
+
+    ```shell
+    rails g thecore_settings:migration
+    ```
 
 ## Gemfile order matters
 
@@ -55,7 +66,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rails_admin_settings
+    $ gem install thecore_settings
 
 ## Basic Usage (like RailsSettings)
 
@@ -73,7 +84,7 @@ Or install it yourself as:
     Settings.phone.area
     Settings.phone.subscriber
 
-See more here: https://github.com/rs-pro/rails_admin_settings/blob/master/spec/advanced_usage_spec.rb
+See more here: https://github.com/rs-pro/thecore_settings/blob/master/spec/advanced_usage_spec.rb
 
 ## Namespacing
 
@@ -146,7 +157,7 @@ It is recommended to disable new/create page (it is not supported by design, set
 Disable via cancan:
 
 ```
-cannot :create, RailsAdminSettings::Setting
+cannot :create, ThecoreSettings::Setting
 ```
 
 ## Contributing

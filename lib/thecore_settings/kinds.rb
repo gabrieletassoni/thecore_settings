@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   def self.kinds
     [
       'string',

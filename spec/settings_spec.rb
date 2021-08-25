@@ -13,7 +13,7 @@ describe 'Settings' do
 
   it '#get should return new setting when setting does not exist' do
     t = Settings.get(:test)
-    expect(t.class.name).to eq 'RailsAdminSettings::Setting'
+    expect(t.class.name).to eq 'ThecoreSettings::Setting'
     expect(t.persisted?).to eq true
     expect(t.value).to eq ''
   end

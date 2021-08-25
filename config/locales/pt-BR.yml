@@ -11,9 +11,9 @@ pt-BR:
       color_invalid: Cor incorreta
   mongoid: &mongoid
     models:
-      rails_admin_settings/setting: Configurações
+      thecore_settings/setting: Configurações
     attributes:
-      rails_admin_settings/setting:
+      thecore_settings/setting:
         c_at: Criado
         u_at: Atualizado
         enabled: Ativado

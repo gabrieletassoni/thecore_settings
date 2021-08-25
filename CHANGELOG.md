@@ -50,7 +50,7 @@ add pt-BR locale (thanks @prem-prakash)
 Disable auto migrate. To migrate from 0.8 run:
 
 ```
-RailsAdminSettings.migrate!
+ThecoreSettings.migrate!
 ```
 
 ## 0.9.1
@@ -66,7 +66,7 @@ RailsAdminSettings.migrate!
 
 Rename it in all invocations, then run migrate DB with:
 
-    RailsAdminSettings.migrate!
+    ThecoreSettings.migrate!
 
 ## 0.6.0
 

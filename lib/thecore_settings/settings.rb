@@ -27,10 +27,10 @@ class Settings < BasicObject
         options[:kind] = options.delete(:type)
       end
       @@mutex.synchronize do
-        @@namespaces[name] ||= ::RailsAdminSettings::Namespaced.new(name.to_s)
+        @@namespaces[name] ||= ::ThecoreSettings::Namespaced.new(name.to_s)
       end
       fallback = options.key?(:fallback) ? options[:fallback] : @@ns_fallback
-      ::RailsAdminSettings::Fallback.new(@@namespaces[name], fallback)
+      ::ThecoreSettings::Fallback.new(@@namespaces[name], fallback)
     end
 
     def get_default_ns
@@ -38,7 +38,7 @@ class Settings < BasicObject
     end
 
     def table_exists?
-      RailsAdminSettings.mongoid? || RailsAdminSettings::Setting.table_exists?
+      ThecoreSettings.mongoid? || ThecoreSettings::Setting.table_exists?
     rescue ActiveRecord::NoDatabaseError
       false
     end
@@ -53,7 +53,7 @@ class Settings < BasicObject
     end
 
     def destroy_all!
-      RailsAdminSettings::Setting.destroy_all
+      ThecoreSettings::Setting.destroy_all
       unload!
     end
 
@@ -66,7 +66,7 @@ class Settings < BasicObject
     end
 
     def apply_defaults!(file, verbose = false)
-      RailsAdminSettings.apply_defaults!(file, verbose)
+      ThecoreSettings.apply_defaults!(file, verbose)
     end
 
     def get(key, options = {})

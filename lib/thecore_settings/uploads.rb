@@ -1,7 +1,7 @@
-module RailsAdminSettings
+module ThecoreSettings
   module Uploads
-    autoload :CarrierWaveUploader, "rails_admin_settings/storage/carrier_wave_uploader"
-    autoload :ShrineUploader, "rails_admin_settings/storage/shrine_uploader"
+    autoload :CarrierWaveUploader, "thecore_settings/storage/carrier_wave_uploader"
+    autoload :ShrineUploader, "thecore_settings/storage/shrine_uploader"
 
     def self.paperclip_options
       if defined?(Rails)
@@ -14,15 +14,15 @@ module RailsAdminSettings
     def self.included(base)
       # carrierwave
       if base.respond_to?(:mount_uploader)
-        # puts "[rails_admin_settings] CarrierWave detected"
+        # puts "[thecore_settings] CarrierWave detected"
         # base.field(:file, type: String)
-        base.mount_uploader(:file, RailsAdminSettings::Uploads::CarrierWaveUploader)
+        base.mount_uploader(:file, ThecoreSettings::Uploads::CarrierWaveUploader)
         Settings.file_uploads_supported = true
         Settings.file_uploads_engine = :carrierwave
       # mongoid-paperclip
-      elsif RailsAdminSettings.mongoid? && ::Mongoid.const_defined?('Paperclip')
+      elsif ThecoreSettings.mongoid? && ::Mongoid.const_defined?('Paperclip')
         base.send(:include, ::Mongoid::Paperclip)
-        # puts "[rails_admin_settings] PaperClip detected"
+        # puts "[thecore_settings] PaperClip detected"
         base.field(:file, type: String)
         base.has_mongoid_attached_file(:file, self.paperclip_options)
         if base.respond_to?(:do_not_validate_attachment_file_type)
@@ -31,25 +31,25 @@ module RailsAdminSettings
 
         Settings.file_uploads_supported = true
         Settings.file_uploads_engine = :paperclip
-      elsif RailsAdminSettings.active_record? && defined?(Paperclip)
+      elsif ThecoreSettings.active_record? && defined?(Paperclip)
         base.has_attached_file(:file, self.paperclip_options)
         if base.respond_to?(:do_not_validate_attachment_file_type)
           base.do_not_validate_attachment_file_type :file
         end
         Settings.file_uploads_supported = true
         Settings.file_uploads_engine = :paperclip
-      elsif RailsAdminSettings.active_record? && defined?(Shrine)
+      elsif ThecoreSettings.active_record? && defined?(Shrine)
         Settings.file_uploads_supported = true
         Settings.file_uploads_engine = :shrine
         base.send(:include, ShrineUploader::Attachment(:file))
-      elsif RailsAdminSettings.mongoid? && ::Mongoid.const_defined?('Shrine')
+      elsif ThecoreSettings.mongoid? && ::Mongoid.const_defined?('Shrine')
         base.send(:include, ::Mongoid::Document)
         base.send(:include, ShrineUploader::Attachment(:file))
         base.field(:file_data, type: String)
         Settings.file_uploads_supported = true
         Settings.file_uploads_engine = :shrine
       else
-        # puts "[rails_admin_settings] Uploads disabled"
+        # puts "[thecore_settings] Uploads disabled"
       end
     end
   end

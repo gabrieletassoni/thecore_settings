@@ -1,6 +1,6 @@
 test:
   clients:
     default:
-      database: rails_admin_settings
+      database: thecore_settings
       hosts:
         - localhost:27017

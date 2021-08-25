@@ -18,7 +18,7 @@ namespace :settings do
     else
       path = Settings.root_file_path.join("config/settings.#{args[:as_env]}.yml")
     end
-    RailsAdminSettings::Dumper.dump(path)
+    ThecoreSettings::Dumper.dump(path)
     puts "dumped settings to #{path}"
   end
 

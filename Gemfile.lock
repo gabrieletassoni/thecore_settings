@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_admin_settings (1.6.0)
+    thecore_settings (1.6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -262,7 +262,7 @@ DEPENDENCIES
   mongoid-paperclip
   mongoid-rspec
   rails
-  rails_admin_settings!
+  thecore_settings!
   rake
   rspec
   rubocop-rspec

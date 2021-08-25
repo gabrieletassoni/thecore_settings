@@ -64,11 +64,11 @@ if ENV['RAILS'] == '1'
   Rails.application.initialize!
 end
 
-require 'rails_admin_settings'
+require 'thecore_settings'
 
 
 if ENV['UPLOADS'] == 'paperclip'
-  module RailsAdminSettings::Uploads
+  module ThecoreSettings::Uploads
     def self.paperclip_options
       {path: "#{File.dirname(__FILE__)}/../uploads/:filename", url: '/uploads/:filename'}
     end

@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   module Validation
     class << self
       def included(base)
@@ -7,7 +7,7 @@ module RailsAdminSettings
         end
         base.before_validation :preprocess_value, if: :preprocessed_kind?
         base.validates_uniqueness_of :key, scope: :ns
-        base.validates_inclusion_of :kind, in: RailsAdminSettings.kinds
+        base.validates_inclusion_of :kind, in: ThecoreSettings.kinds
         base.validates_numericality_of :raw, if: :integer_kind?
         base.validates_numericality_of :raw, if: :float_kind?
 
@@ -26,13 +26,13 @@ module RailsAdminSettings
       end
 
       def add_color_validator(base)
-        base.validates_with(RailsAdminSettings::HexColorValidator, attributes: :raw, if: :color_kind?)
+        base.validates_with(ThecoreSettings::HexColorValidator, attributes: :raw, if: :color_kind?)
       end
 
       def add_file_validator(base)
         base.validate if: :file_kind? do
           unless Settings.file_uploads_supported
-            raise '[rails_admin_settings] File kind requires either CarrierWave or Paperclip or Shrine. Check that rails_admin_settings is below them in Gemfile'
+            raise '[thecore_settings] File kind requires either CarrierWave or Paperclip or Shrine. Check that thecore_settings is below them in Gemfile'
           end
         end
       end
@@ -87,7 +87,7 @@ module RailsAdminSettings
           end
         end
         if Object.const_defined?('Geocoder')
-          if RailsAdminSettings.mongoid?
+          if ThecoreSettings.mongoid?
             base.field(:coordinates, type: Array)
             base.send(:include, Geocoder::Model::Mongoid)
           end

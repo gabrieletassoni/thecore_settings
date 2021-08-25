@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   class NoRailsError  < StandardError
     def initialize(message)
       @message = message
@@ -16,7 +16,7 @@ module RailsAdminSettings
         require 'russian_phone'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'russian_phone' to use phone settings"
+        e.message << " [thecore_settings] Please add gem 'russian_phone' to use phone settings"
         raise e
       end
     end
@@ -26,7 +26,7 @@ module RailsAdminSettings
         require 'safe_yaml'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'safe_yaml' to your Gemfile to use yaml settings"
+        e.message << " [thecore_settings] Please add gem 'safe_yaml' to your Gemfile to use yaml settings"
         raise e
       end
     end
@@ -36,7 +36,7 @@ module RailsAdminSettings
         require 'sanitize'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'sanitize' to your Gemfile to use sanitized settings"
+        e.message << " [thecore_settings] Please add gem 'sanitize' to your Gemfile to use sanitized settings"
         raise e
       end
     end
@@ -45,10 +45,10 @@ module RailsAdminSettings
       if defined?(Rails) &&
           defined?(ActionController) &&
           defined?(ActionController::Base) &&
-          !RailsAdminSettings.scrubber.nil?
+          !ThecoreSettings.scrubber.nil?
         yield
       else
-        raise NoRailsError.new("[rails_admin_settings] sanitize, simple_format and strip_tags types require Rails, please add this gem after Rails in your Gemfile")
+        raise NoRailsError.new("[thecore_settings] sanitize, simple_format and strip_tags types require Rails, please add this gem after Rails in your Gemfile")
       end
     end
 
@@ -57,7 +57,7 @@ module RailsAdminSettings
         require 'validates_email_format_of'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'validates_email_format_of' to your Gemfile to use email kind settings"
+        e.message << " [thecore_settings] Please add gem 'validates_email_format_of' to your Gemfile to use email kind settings"
         raise e
       end
     end
@@ -67,7 +67,7 @@ module RailsAdminSettings
         require 'geocoder'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'validates_email_format_of' to your Gemfile to use email kind settings"
+        e.message << " [thecore_settings] Please add gem 'validates_email_format_of' to your Gemfile to use email kind settings"
         raise e
       end
     end
@@ -77,7 +77,7 @@ module RailsAdminSettings
         require 'addressable/uri'
         yield
       rescue LoadError => e
-        e.message << " [rails_admin_settings] Please add gem 'addressable' to your Gemfile to use url/domain kind settings"
+        e.message << " [thecore_settings] Please add gem 'addressable' to your Gemfile to use url/domain kind settings"
         raise e
       end
     end

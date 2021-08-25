@@ -1,4 +1,4 @@
-module RailsAdminSettings
+module ThecoreSettings
   module Uploads
     class CarrierWaveUploader < CarrierWave::Uploader::Base
       def extension_white_list
