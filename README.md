@@ -2,9 +2,9 @@
 
 Project forked from:
 
-https://gitlab.com/rocket-science/thecore_settings
+https://gitlab.com/rocket-science/rails_admin_settings
 
-Since it looks in hyatus status.
+Since it looks in hyatus.
 
 
 [![Build Status](https://secure.travis-ci.org/rs-pro/thecore_settings.png?branch=master)](http://travis-ci.org/rs-pro/thecore_settings)
