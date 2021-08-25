@@ -5,15 +5,15 @@ module TheCoreSettingsAbilitiesConcern
   included do
     def thecore_settings_abilities user
       # Rails.logger.debug "Cannot Create"
-      cannot :create, RailsAdminSettings::Setting
+      cannot :create, ThecoreSettings::Setting
       # Rails.logger.debug "Cannot Delete"
-      cannot :destroy, RailsAdminSettings::Setting
-      cannot :show, RailsAdminSettings::Setting
+      cannot :destroy, ThecoreSettings::Setting
+      cannot :show, ThecoreSettings::Setting
 
-      # cannot :manage, [RailsAdminSettings::Setting]
-      # cannot :dashboard, [RailsAdminSettings::Setting]
+      # cannot :manage, [ThecoreSettings::Setting]
+      # cannot :dashboard, [ThecoreSettings::Setting]
       # # Pay attention to this errorTypeError (can't convert Class to Array (Class#to_ary gives String)):
-      # can [:index, :update], [RailsAdminSettings::Setting] if user && user.admin?
+      # can [:index, :update], [ThecoreSettings::Setting] if user && user.admin?
     end
   end
 end

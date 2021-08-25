@@ -1,4 +1,4 @@
-class CreateRailsAdminSettings < ActiveRecord::Migration[5.0]
+class CreateThecoreSettings < ActiveRecord::Migration[5.0]
   def change
     create_table :thecore_settings do |t|
       t.boolean :enabled, default: true
