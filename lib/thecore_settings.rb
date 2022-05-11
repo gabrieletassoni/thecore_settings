@@ -1,4 +1,4 @@
-require "thecore_settings/version"
+# require "thecore_settings/version"
 
 module ThecoreSettings
   if defined?(Rails) && defined?(Rails::Html) && defined?(Rails::Html::WhiteListSanitizer)
