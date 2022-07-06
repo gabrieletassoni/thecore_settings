@@ -8,37 +8,31 @@ Gem::Specification.new do |spec|
   spec.version       = ThecoreSettings::VERSION
   spec.authors       = ["Gabriele Tassoni", "Gleb Tv"]
   spec.email         = ["gabriele.tassoni@gmail.com", "glebtv@gmail.com"]
-  spec.description   = %q{Mongoid / ActiveRecord + RailsAdmin App Settings management}
+  spec.description   = %q{ActiveRecord + RailsAdmin App Settings management}
   spec.summary       = %q{}
   spec.homepage      = "https://github.com/gabrieletassoni/thecore_settings"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  if spec.respond_to?(:metadata)
+    spec.metadata["allowed_push_host"] = "https://rubygems.org"
+  else
+    raise "RubyGems 2.0 or newer is required to protect against " \
+      "public gem pushes."
+  end
 
+  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_development_dependency "mongoid", '~> 6.3'
-  spec.add_development_dependency "rails"
-  spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "mongoid-rspec"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "database_cleaner"
-  spec.add_development_dependency "factory_bot"
-  spec.add_development_dependency "safe_yaml"
-  spec.add_development_dependency "russian_phone"
-  spec.add_development_dependency "sanitize"
-  spec.add_development_dependency "validates_email_format_of"
-  spec.add_development_dependency "geocoder"
-  spec.add_development_dependency "addressable"
-  spec.add_development_dependency "carrierwave-mongoid"
-  spec.add_development_dependency "mongoid-paperclip"
-  spec.add_development_dependency "rubocop-rspec"
-  spec.add_development_dependency 'image_processing'
-  spec.add_development_dependency "mini_magick"
-  spec.add_development_dependency "shrine", "~> 3.0"
-  spec.add_development_dependency "shrine-mongoid", "~> 1.0"
+  spec.add_dependency "simplecov"
+  spec.add_dependency "database_cleaner"
+  spec.add_dependency "factory_bot"
+  spec.add_dependency "safe_yaml"
+  spec.add_dependency "russian_phone"
+  spec.add_dependency "sanitize"
+  spec.add_dependency "validates_email_format_of"
+  spec.add_dependency "geocoder"
+  spec.add_dependency "addressable"
+  spec.add_dependency "rubocop-rspec"
+  spec.add_dependency 'image_processing'
+  spec.add_dependency "mini_magick"
+  spec.add_dependency "shrine", "~> 3.0"
 end
