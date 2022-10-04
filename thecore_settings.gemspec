@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rubocop-rspec"
   spec.add_dependency 'image_processing'
   spec.add_dependency "mini_magick"
-  spec.add_dependency "shrine", "~> 3.0"
+  spec.add_dependency "shrine", "~> 3.4"
 end
