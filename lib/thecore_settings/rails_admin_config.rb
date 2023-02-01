@@ -3,7 +3,7 @@ module ThecoreSettings
     def self.included(base)
       if base.respond_to?(:rails_admin)
         base.rails_admin do
-          navigation_label I18n.t('admin.settings.label')
+          navigation_label I18n.t("admin.settings.label")
           list do
             if Object.const_defined?('RailsAdminToggleable')
               field :enabled, :toggle
