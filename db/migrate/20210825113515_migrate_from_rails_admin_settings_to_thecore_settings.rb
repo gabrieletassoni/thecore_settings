@@ -1,4 +1,4 @@
-class MigrateFromRailsAdminSettingsToThecoreSettings < ActiveRecord::Migration[5.2]
+class MigrateFromRailsAdminSettingsToThecoreSettings < ActiveRecord::Migration[7.0]
   
   module RailsAdminSettings
     class Setting < ActiveRecord::Base
