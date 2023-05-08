@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ThecoreSettings
-  VERSION = "#{`git describe --tags $(git rev-list --tags --max-count=1)`.chomp}"
+  VERSION = '2.0.9'
 end
