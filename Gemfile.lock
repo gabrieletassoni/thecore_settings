@@ -106,7 +106,7 @@ GEM
       rake
     mini_magick (4.11.0)
     mini_mime (1.1.1)
-    mini_portile2 (2.8.1)
+    mini_portile2 (2.8.2)
     minitest (5.17.0)
     mongo (2.15.1)
       bson (>= 4.8.2, < 5.0.0)
@@ -130,7 +130,7 @@ GEM
       rspec-expectations (~> 3.3)
       rspec-mocks (~> 3.3)
     nio4r (2.5.8)
-    nokogiri (1.14.1)
+    nokogiri (1.14.3)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     paperclip (6.1.0)
