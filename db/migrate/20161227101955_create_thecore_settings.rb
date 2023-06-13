@@ -1,6 +1,6 @@
-class CreateThecoreSettings < ActiveRecord::Migration[5.2]
+class CreateThecoreSettings < ActiveRecord::Migration[7.0]
   def change
-    create_table :thecore_settings do |t|
+    create_table :thecore_settings, if_not_exists: true do |t|
       t.boolean :enabled, default: true
       t.string :kind, null: false, default: 'string'
       t.string :ns, default: 'main'
