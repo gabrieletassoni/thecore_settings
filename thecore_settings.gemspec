@@ -21,12 +21,20 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
+  # https://github.com/dtao/safe_yaml
   spec.add_dependency "safe_yaml", "~> 1.0"
-  spec.add_dependency "russian_phone", "~> 0.7"
-  spec.add_dependency "sanitize", "~> 6.0"
-  spec.add_dependency "validates_email_format_of", "~> 1.7"
+  # https://gitlab.com/rocket-science/russian_phone
+  spec.add_dependency "russian_phone", "~> 0.8"
+  # https://github.com/rgrove/sanitize
+  spec.add_dependency "sanitize", "~> 7.0"
+  # https://github.com/validates-email-format-of/validates_email_format_of
+  spec.add_dependency "validates_email_format_of", "~> 1.8"
+  # https://github.com/alexreisner/geocoder
   spec.add_dependency "geocoder", "~> 1.8"
+  # https://github.com/sporkmonger/addressable
   spec.add_dependency "addressable", "~> 2.8"
-  spec.add_dependency "mini_magick", "~> 4.12"
-  spec.add_dependency "shrine", "~> 3.4"
+  # https://github.com/minimagick/minimagick
+  spec.add_dependency "mini_magick", "~> 5.1"
+  # https://github.com/shrinerb/shrine
+  spec.add_dependency "shrine", "~> 3.6"
 end
