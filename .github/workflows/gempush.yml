@@ -1,6 +1,10 @@
 name: Ruby Gem
 
-on: push
+# Publish only from the release branch: a version bump pushed to any other branch must never reach RubyGems.
+on:
+  push:
+    branches:
+      - release/3
 
 jobs:
   build:
