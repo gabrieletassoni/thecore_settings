@@ -51,9 +51,9 @@ Defaults YAML for `Settings.apply_defaults!` uses `kind:` per key; `type:` (the 
 
 Bump `lib/thecore_settings/version.rb` and push to `release/3`. `.github/workflows/gempush.yml` runs
 the test suite (PostgreSQL 15, Ruby 3.3) on every push and pull request on `release/3`; on a push its
-`publish` job runs only when the tests are green, and only for a version with no tag yet: it tags
-the version, creates the GitHub release with the JUnit report attached, and publishes the gem to
-RubyGems.org. A red test never publishes, a push that doesn't change the version publishes nothing,
+`publish` job runs only when the tests are green, and only for a version with no tag yet: it publishes
+the gem to RubyGems.org, then tags the version and creates the GitHub release with the JUnit report
+attached. A red test never publishes, a push that doesn't change the version publishes nothing,
 and no other branch ever publishes. Then, in each host app,
 `bundle update thecore_settings --conservative` and commit `Gemfile.lock` together with the moved
 submodule pointer.
