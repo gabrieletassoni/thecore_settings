@@ -28,17 +28,33 @@ https://github.com/gabrieletassoni/thecore/tree/release/3.
 
 ## Running tests
 
-There is no runnable suite. `spec/` is the RSpec suite inherited from `rails_admin_settings`: it
-targets Mongoid (`ACTIVERECORD` unset), and neither `rspec` nor `mongoid` is in the `Gemfile`.
-`bin/test` expects a `test/` directory that doesn't exist. Behaviour is covered indirectly by the
-host apps' suites. A new test belongs in a Minitest suite on **PostgreSQL only** (never SQLite),
-like every Thecore gem.
+Minitest suite under `test/`, with a minimal dummy app in `test/dummy` (Active Record + Action
+Controller only) on **PostgreSQL only**, never SQLite. `test/dummy/config/boot.rb` keeps
+`DATABASE_URL`'s server and credentials but always uses `thecore_settings_<env>`, so a run never
+touches the host app's database. The schema comes from the engine's own `db/migrate/`.
+
+```bash
+bundle install
+(cd test/dummy && RAILS_ENV=test bin/rails db:create)   # one-time
+bin/test                                               # or: bundle exec rake test
+bin/test test/settings_test.rb                         # single file
+JUNIT_REPORT_DIR=tmp/junit bin/test                    # + JUnit XML, as CI does
+```
+
+`spec/` is the RSpec suite inherited from `rails_admin_settings`: it targets Mongoid and does not
+run (neither `rspec` nor `mongoid` is in the `Gemfile`). New tests go in `test/`.
+
+Defaults YAML for `Settings.apply_defaults!` uses `kind:` per key; `type:` (the old
+`rails_admin_settings` spelling) is not an Active Record attribute and is refused.
 
 ## Release
 
-Bump `lib/thecore_settings/version.rb` and push to `release/3`: `.github/workflows/gempush.yml`
-tags the version and publishes it to RubyGems.org. A push that doesn't change the version publishes
-nothing, and no other branch ever publishes. Then, in each host app,
+Bump `lib/thecore_settings/version.rb` and push to `release/3`. `.github/workflows/gempush.yml` runs
+the test suite (PostgreSQL 15, Ruby 3.3) on every push and pull request on `release/3`; on a push its
+`publish` job runs only when the tests are green, and only for a version with no tag yet: it tags
+the version, creates the GitHub release with the JUnit report attached, and publishes the gem to
+RubyGems.org. A red test never publishes, a push that doesn't change the version publishes nothing,
+and no other branch ever publishes. Then, in each host app,
 `bundle update thecore_settings --conservative` and commit `Gemfile.lock` together with the moved
 submodule pointer.
 
@@ -50,7 +66,7 @@ Configured in the GitHub repository settings, not in files:
   ships any): on every push to `release/3`, on pull requests and weekly. Findings: Security → Code
   scanning.
 - **Secret scanning with push protection**: a push containing a recognised secret is rejected. It
-  is the only check that blocks anything. If it fires on a real secret, remove it from the commit and
+  is the only security check that blocks anything (a red test suite blocks the gem publish). If it fires on a real secret, remove it from the commit and
   rotate the secret; never bypass it.
 - **Dependabot alerts and security updates**, but no `dependabot.yml`, so no routine version-bump
   pull requests. This gem commits no `Gemfile.lock`, so Dependabot only sees the gemspec and the
