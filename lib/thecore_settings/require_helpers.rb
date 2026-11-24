@@ -23,7 +23,9 @@ module ThecoreSettings
 
     def require_safe_yaml
       begin
-        require 'safe_yaml'
+        # safe_yaml/load, not safe_yaml: the latter redefines YAML.load_file for the whole
+        # process, which breaks I18n's locale loading and every YAML.load_file(path, **options).
+        require 'safe_yaml/load'
         yield
       rescue LoadError => e
         e.message << " [thecore_settings] Please add gem 'safe_yaml' to your Gemfile to use yaml settings"
