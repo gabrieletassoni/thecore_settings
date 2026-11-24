@@ -1,0 +1,19 @@
+# PostgreSQL only: every Thecore gem and host app targets Postgres exclusively, so this dummy
+# app does too (never SQLite). When DATABASE_URL is set (e.g. in the devcontainer),
+# config/boot.rb rewrites its database name to thecore_settings_<RAILS_ENV>.
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch("PGHOST", "db") %>
+  port: <%= ENV.fetch("PGPORT", 5432) %>
+  username: <%= ENV.fetch("PGUSER", "postgres") %>
+  password: <%= ENV.fetch("PGPASSWORD", "postgres") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: thecore_settings_development
+
+test:
+  <<: *default
+  database: thecore_settings_test

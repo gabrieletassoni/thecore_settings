@@ -1,0 +1,11 @@
+main:
+  site_name:
+    kind: string
+    value: Thecore
+  page_size:
+    kind: integer
+    value: 25
+mail:
+  from_address:
+    kind: email
+    value: noreply@example.com
