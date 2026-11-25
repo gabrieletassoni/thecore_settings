@@ -1,3 +1,8 @@
+<%# A Secret setting is write-only (host ADR 0046 point 10): an empty password field, left empty to keep the stored value. %>
+<% if @object.secret? %>
+  <%= form.password_field :raw, value: nil, autocomplete: "new-password",
+        placeholder: (@object.raw_in_database.present? ? t("admin.settings.secret_set", default: "Set: leave empty to keep it") : nil) %>
+<% else %>
 <% if ['string', 'integer', 'float', 'phone', 'email', 'address', 'url', 'domain'].include?(@object.type) %>
   <%= form.text_field :raw, :value => field.value %>
 <% end %>
@@ -48,4 +53,5 @@
     </div>
     <%= form.text_area :raw, :value => field.value, :rows => 10, :cols => 80 %>
   <% end %>
+<% end %>
 <% end %>

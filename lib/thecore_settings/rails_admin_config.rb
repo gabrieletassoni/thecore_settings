@@ -4,6 +4,31 @@ module ThecoreSettings
       if base.respond_to?(:rails_admin)
         base.rails_admin do
           navigation_label Proc.new {I18n.t("admin.settings.label")}
+          # One pretty_value for list, show and export (export_value is pretty_value): a Secret
+          # setting shows only whether it is set (host ADR 0046 point 10).
+          configure :raw do
+            pretty_value do
+              object = bindings[:object]
+              if object.secret?
+                object.raw.present? ? "••••••••" : "-"
+              elsif object.file_kind? and !defined?(Shrine) and object.to_path.present?
+                if object.file.url.blank?
+                  "-"
+                else
+                  "<a href='#{CGI::escapeHTML(object.file.url)}'>#{CGI::escapeHTML(object.to_path)}</a>".html_safe
+                end
+              elsif object.image_kind? and !defined?(Shrine) and !object.file.nil?
+                if object.file.url.blank?
+                  "-"
+                else
+                  "<a href='#{CGI::escapeHTML(object.file.url)}'><img src='#{CGI::escapeHTML(object.file.url)}' /></a>".html_safe
+                end
+              else
+                value
+              end
+            end
+          end
+
           list do
             if Object.const_defined?('RailsAdminToggleable')
               field :enabled, :toggle
@@ -13,25 +38,7 @@ module ThecoreSettings
             field :kind
             field :ns
             field :name
-            field :raw do
-              pretty_value do
-                if bindings[:object].file_kind? and !defined?(Shrine) and bindings[:object].to_path.present?
-                  if bindings[:object].file.url.blank?
-                    "-"
-                  else
-                    "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe
-                  end
-                elsif bindings[:object].image_kind? and !defined?(Shrine) and !bindings[:object].file.nil?
-                  if bindings[:object].file.url.blank?
-                    "-"
-                  else
-                    "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe
-                  end
-                else
-                  value
-                end
-              end
-            end
+            field :raw
             if ::Settings.table_exists?
               nss = ::ThecoreSettings::Setting.pluck(:ns).uniq.map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
               scopes([nil] + nss)

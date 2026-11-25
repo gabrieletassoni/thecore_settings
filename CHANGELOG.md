@@ -1,3 +1,13 @@
+## 3.1.0 (2026-11-25)
+
+Secret settings are write-only (host Odoo #6084, host ADR 0046 point 10). A setting whose key names a
+secret (`password`, `*_password`, `passwd`, `secret`, `*_secret`, `private_key`, `api_key`, `token`,
+`*_token`: `ThecoreSettings::Setting.secret_key?` / `#secret?`) keeps being read by the code as
+before, but `as_json`/`to_json` return its `raw` as `null` (and ignore `methods:`), RailsAdmin shows
+only whether it is set in list, show and export, the edit form is an empty password field, and a
+blank save keeps the stored value. To clear a secret, destroy its row. No encryption: that is
+release/4.
+
 ## 1.6.0 (2020-06-11)
 
 Add shrine file uploads

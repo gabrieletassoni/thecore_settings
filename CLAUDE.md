@@ -25,6 +25,12 @@ https://github.com/gabrieletassoni/thecore/tree/release/3.
   `Settings.ns(...)` DSL memoizes a namespace for the life of the process, so a long-running
   process (Sidekiq) doesn't see an admin's later edit.
 - Host apps seed their defaults with `find_or_create_by!` in their own `db/seeds.rb`.
+- **Secret settings are write-only** (3.1.0, host ADR 0046 point 10): a key matching
+  `Setting::SECRET_KEY` (`password`, `*_password`, `private_key`, `*_secret`, `*_token`, `api_key`, ...)
+  is read by code through `raw` as usual, but `serializable_hash` nulls `raw` (and drops `methods:`),
+  RailsAdmin masks it in list/show/export and edits it in an empty password field, and a blank save
+  keeps the stored value (`before_save`). Clearing one means destroying the row. Never add a
+  serialization or view path that returns `raw` of a secret; encryption comes only on release/4.
 
 ## Running tests
 

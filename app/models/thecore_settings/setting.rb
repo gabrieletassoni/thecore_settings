@@ -23,6 +23,32 @@ module ThecoreSettings
     include ThecoreSettings::Uploads
     include ThecoreSettings::Validation
 
+    # A key that names a secret (smtp.password, sql.password, the SMB shares' password,
+    # vapid.private_key, ...): the whole key or its last underscore-separated part.
+    SECRET_KEY = /(\A|_)(password|passwd|secret|private_key|api_key|token)\z/i
+
+    def self.secret_key?(key)
+      SECRET_KEY.match?(key.to_s)
+    end
+
+    # A Secret setting is write-only (host ADR 0046 point 10): the code reads raw, nothing
+    # serializes it, and a blank save (the masked RailsAdmin field left empty) keeps the stored
+    # value. To clear one, destroy the row (the seeds recreate it empty).
+    def secret?
+      self.class.secret_key?(key)
+    end
+
+    before_save :keep_secret_when_blank, if: :secret?
+
+    # No `methods:` for a secret, whose value could come back through any of them (value,
+    # attributes, raw_was...), and raw always nil.
+    def serializable_hash(options = nil)
+      return super unless secret?
+
+      options = (options || {}).to_h.symbolize_keys.except(:methods)
+      super(options).tap { |hash| hash["raw"] = nil if hash.key?("raw") }
+    end
+
     def disabled?
       !enabled
     end
@@ -37,6 +63,10 @@ module ThecoreSettings
 
     def type
       kind
+    end
+
+    private def keep_secret_when_blank
+      self.raw = raw_in_database if raw.blank? && raw_in_database.present?
     end
 
     def to_path

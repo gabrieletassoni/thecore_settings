@@ -7,6 +7,7 @@ it:
   admin:
     settings:
       label: 'Impostazioni'
+      secret_set: "Impostata: lascia vuoto per mantenerla"
       no_ckeditor_detected: CKEditor non trovato &mdash; mostro il campo come semplice testo
       phone_invalid: Telefono non valido
       phones_invalid: "Telefono non valido: %{phones}"

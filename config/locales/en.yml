@@ -2,6 +2,7 @@ en:
   admin:
     settings:
       label: 'Settings'
+      secret_set: "Set: leave empty to keep it"
       no_ckeditor_detected: CKEditor not found &mdash; showing as text input
       phone_invalid: Incorrect phone
       phones_invalid: "Incorrect phone: %{phones}"
